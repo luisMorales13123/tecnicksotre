@@ -1,0 +1,46 @@
+
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="rpw mt-5" *ngIf="!loading">
+    
+<div class="col-lg-4 offset-lg-4">
+    <div class="card border-secondary mb-3" style="max-width: 26rem;">
+        <div class="card-header text-center">{{ operacion }} Persona</div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="addProduct()">
+                <input  formControlName="pNombre" type="text"  class="form-control" placeholder="Ingrese su primer nombre">
+                <span *ngIf="form.get('pNombre')?.hasError('required')  && form.get('pNombre')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="sNombre" type="text" class="form-control" placeholder="Ingrese su segundo nombre">
+                <span *ngIf="form.get('sNombre')?.hasError('required')  && form.get('sNombre')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="pApellido" type="text" class="form-control" placeholder="Ingrese su primer apellido">
+                <span *ngIf="form.get('pApellido')?.hasError('required')  && form.get('pApellido')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+
+                <input  formControlName="sApellido" type="text"  class="form-control" placeholder="Ingrese su segundo apellido">
+                <span *ngIf="form.get('sApellido')?.hasError('required')  && form.get('sApellido')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+
+                <input  formControlName="Telefono" type="number"  class="form-control" placeholder="Ingrese su telefono">
+                <span *ngIf="form.get('Telefono')?.hasError('required')  && form.get('Telefono')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="Documento" type="text" class="form-control" placeholder="ingrese su #de documento">
+                <span *ngIf="form.get('Documento')?.hasError('required')  && form.get('Documento')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="FechaNacimiento" type="text" class="form-control" placeholder="Ingrese su fecha de nacimiento">
+                <span *ngIf="form.get('FechaNacimiento')?.hasError('required')  && form.get('FechaNacimiento')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="TelefonoAux" type="text" class="form-control" placeholder="Ingrese su telefono aux">
+                <span *ngIf="form.get('TelefonoAux')?.hasError('required')  && form.get('TelefonoAux')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                <input  formControlName="TipoDocumento" type="number" class="form-control" placeholder="Ingrese su TipoDcoumento">
+                <span *ngIf="form.get('TipoDocumento')?.hasError('required')  && form.get('TipoDocumento')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+                
+<div class="row mt-2 text-center">
+
+    <div class="col-lg-6"><button routerLink="/" type="button" class="btn btn-secondary">Volver</button></div>
+    <div class="col-lg-6"><button  [disabled]="form.invalid" type="submit" class="btn btn-primary">Agregar</button></div>
+</div>
+
+
+            </form>
+   
+        </div>
+      </div>
+    
+</div>
+
+</div>

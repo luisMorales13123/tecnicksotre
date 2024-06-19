@@ -1,0 +1,52 @@
+
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container" >
+    <div class="title">
+        <h4>Listado de Personas</h4>
+        <button type="button" class="btn btn-primary" routerLink="/AgregarPersona">Agregar Persona</button>
+    </div>
+
+    <table  class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">pNombre</th>
+            <th scope="col">sNombre</th>
+            <th scope="col">pApellido</th>
+            <th scope="col">sApellido</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Documento</th>
+            <th scope="col">FechaNacimiento</th>
+            <th scope="col">TelefonoAux</th>
+            <th scope="col">TipoDocumento</th>
+            
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ListarPersona" class="table-active">
+            <td>{{ item.id }}</td>
+            <td>{{ item.pNombre }}</td>
+            <td>{{ item.sNombre }}</td>
+            <td>{{ item.pApellido }}</td>
+            <td>{{ item.sApellido }}</td>
+            <td>{{ item.Telefono }}</td>
+            <td>{{ item.Documento }}</td>
+            <td>{{ item.FechaNacimiento }}</td>
+            <td>{{ item.TelefonoAux }}</td>
+            <td>{{ item.TipoDocumento }}</td>
+       
+
+            <td>
+                <button type="button" class="btn btn-info btn-sm" routerLink="/EditarPersona/{{ item.id }}">Editar</button>
+                <button (click)="deleteProduct(item.id)" type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
+            </td>
+          </tr>
+       
+        </tbody>
+      </table>
+</div>
+
+
+

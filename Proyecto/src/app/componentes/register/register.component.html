@@ -1,0 +1,110 @@
+<form [formGroup]="profileForm" class="form-container">
+  <div class="container">
+    <div class="row justify-content-center"  >
+      <div class="col-md-6">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Profile Information</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Primer Nombre</mat-label>
+                  <input matInput placeholder="PrimerNombre" (input)="onInputChange($event)"  formControlName="firstName" required>
+                  <mat-icon matSuffix *ngIf="isInputEmptyuno"  [ngClass]="{'icon-red': isInputEmptyuno, 'icon-green': !isInputEmptyuno}">sentiment_very_dissatisfied</mat-icon>
+                  <mat-icon matSuffix *ngIf="!isInputEmptyuno"  [ngClass]="{'icon-red': isInputEmptyuno, 'icon-green': !isInputEmptyuno}">sentiment_very_satisfied</mat-icon>
+               
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Segundo Nombre</mat-label>
+                  <input matInput placeholder="SegundoNombre" (input)="onSecondNameInputChange($event)"  formControlName="secondName" required>
+                  <mat-icon matSuffix *ngIf="isInputEmpty"  [ngClass]="{'icon-red': isInputEmpty, 'icon-green': !isInputEmpty}">sentiment_very_dissatisfied</mat-icon>
+                  <mat-icon matSuffix *ngIf="!isInputEmpty"  [ngClass]="{'icon-red': isInputEmpty, 'icon-green': !isInputEmpty}">sentiment_very_satisfied</mat-icon>
+               
+                </mat-form-field>
+              </div>
+           
+          </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Primer Apellido</mat-label>
+                  <input matInput placeholder="Primer Apellido" (input)="OnfirstLastName($event)"  formControlName="firstLastName" required>
+                  <mat-icon matSuffix *ngIf="firstLastName"  [ngClass]="{'icon-red': firstLastName, 'icon-green': !firstLastName}">sentiment_very_dissatisfied</mat-icon>
+                  <mat-icon matSuffix *ngIf="!firstLastName"  [ngClass]="{'icon-red': firstLastName, 'icon-green': !firstLastName}">sentiment_very_satisfied</mat-icon>
+               
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="fill">
+                  <mat-label>Segundo Apellido</mat-label>
+                  <input matInput placeholder="Segundo Apellido" (input)="OnsecondLastName($event)"  formControlName="secondLastName" required>
+                  <mat-icon matSuffix *ngIf="secondLastName"  [ngClass]="{'icon-red': secondLastName, 'icon-green': !secondLastName}">sentiment_very_dissatisfied</mat-icon>
+                  <mat-icon matSuffix *ngIf="!secondLastName"  [ngClass]="{'icon-red': secondLastName, 'icon-green': !secondLastName}">sentiment_very_satisfied</mat-icon>
+               
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field>
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput type="number" maxlength="10" pattern="[0-9]*" formControlName="telefono">
+                  <small *ngIf="profileForm.get('telefono')?.hasError('pattern')">Ingrese solo números</small>
+                  <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+    
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <input formControlName="docmuento" matInput placeholder="Docuemnto">
+                </mat-form-field>
+              </div>
+            </div>
+
+
+
+   
+
+
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Select DOB</mat-label>
+                  <input formControlName="dob" matInput [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Select Gender</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="1">Male</mat-option>
+                    <mat-option value="2">Female</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="saveForm()" mat-raised-button color="primary">Save</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</form>

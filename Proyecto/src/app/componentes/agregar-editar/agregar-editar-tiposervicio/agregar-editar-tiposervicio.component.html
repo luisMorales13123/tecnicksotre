@@ -1,0 +1,27 @@
+
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="rpw mt-5" *ngIf="!loading">
+    
+<div class="col-lg-4 offset-lg-4">
+    <div class="card border-secondary mb-3" style="max-width: 26rem;">
+        <div class="card-header text-center">{{ operacion }} TipoServicio</div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="addProduct()">
+                <input  formControlName="TipoServicio" type="text" class="form-control" placeholder="Ingrese nombre">
+                <span *ngIf="form.get('TipoServicio')?.hasError('required')  && form.get('TipoServicio')?.touched ">El campo nombre es <strong>Requerido</strong></span>
+<div class="row mt-2 text-center">
+
+    <div class="col-lg-6"><button routerLink="/" type="button" class="btn btn-secondary">Volver</button></div>
+    <div class="col-lg-6"><button  [disabled]="form.invalid" type="submit" class="btn btn-primary">Agregar</button></div>
+</div>
+
+
+            </form>
+   
+        </div>
+      </div>
+    
+</div>
+
+</div>

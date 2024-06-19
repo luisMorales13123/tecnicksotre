@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="rpw mt-5" *ngIf="!loading">
+    
+  <div class="col-lg-4 offset-lg-4">
+      <div class="card border-secondary mb-3" style="max-width: 26rem;">
+          <div class="card-header text-center">{{ operacion }} Servicio</div>
+          <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="addService()">
+                  <input formControlName="descDano" type="text" class="form-control" placeholder="Descripción Inconveniente">
+                  <span *ngIf="form.get('descDano')?.hasError('required') && form.get('descDano')?.touched">La descripción es <strong>requerida</strong></span>
+                  <br>
+                  <input formControlName="ServicioTerminado" type="text" class="form-control" placeholder="Servicio Terminado">
+                  <br>
+                  <input formControlName="idEquipoaReparar" type="number" class="form-control" placeholder="ID Equipo a Reparar">
+                  <br>
+                  <input formControlName="IdTecnicoEncargado" type="number" class="form-control" placeholder="ID Técnico Encargado">
+                  <br>
+                  <input formControlName="idDuenoServicio" type="number" class="form-control" placeholder="ID Propietario del Servicio">
+                  <br>
+                  <input formControlName="TipoServicio_idTipoServicio" type="number" class="form-control" placeholder="ID Tipo de Servicio">
+                  <br>
+
+                  <div class="row mt-2 text-center">
+                      <div class="col-lg-6"><button routerLink="/Servicio" type="button" class="btn btn-secondary">Volver</button></div>
+                      <div class="col-lg-6"><button [disabled]="form.invalid" type="submit" class="btn btn-primary">{{ operacion }}</button></div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+</div>

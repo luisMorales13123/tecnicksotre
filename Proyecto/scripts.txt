@@ -1,0 +1,301 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema proyectotecknicstore
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema proyectotecknicstore
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `proyectotecknicstore` DEFAULT CHARACTER SET utf8 ;
+USE `proyectotecknicstore` ;
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tipodedocumento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tipodedocumento` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoDocumento` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`persona`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`persona` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `pNombre` VARCHAR(45) NOT NULL,
+  `sNombre` VARCHAR(45) NULL DEFAULT NULL,
+  `pApellido` VARCHAR(45) NOT NULL,
+  `sApellido` VARCHAR(45) NULL DEFAULT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Documento` VARCHAR(45) NOT NULL,
+  `FechaNacimiento` DATE NULL DEFAULT NULL,
+  `TelefonoAux` VARCHAR(45) NULL DEFAULT NULL,
+  `TipoDcoumento` INT(11) NOT NULL,
+  `Correo` VARCHAR(45) NOT NULL,
+  `Clave` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+
+  CONSTRAINT `fk_Persona_TipodeDocumento1`
+    FOREIGN KEY (`TipoDcoumento`)
+    REFERENCES `proyectotecknicstore`.`tipodedocumento` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`administrador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`administrador` (
+  `id` INT(11) NOT NULL,
+  `Uusario_idUusario` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_Uusario_has_Persona_Persona1`
+    FOREIGN KEY (`id`)
+    REFERENCES `proyectotecknicstore`.`persona` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`cargostecnico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`cargostecnico` (
+  `id` INT(11) NOT NULL,
+  `CargosTecnico` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tipoequipo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tipoequipo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoEquipo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`equipo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`equipo` (
+  `id` INT(11) NOT NULL,
+  `descInconveniente` VARCHAR(600) NOT NULL,
+  `idMarca` INT(11) NOT NULL,
+  `idTipoEquipo` INT(11) NOT NULL,
+  `idUusario` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Equipo_TipoEquipo1` (`idTipoEquipo` ASC) VISIBLE,
+  CONSTRAINT `fk_Equipo_TipoEquipo1`
+    FOREIGN KEY (`idTipoEquipo`)
+    REFERENCES `proyectotecknicstore`.`tipoequipo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tecnico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tecnico` (
+  `IdTecnico` INT(11) NOT NULL,
+  `CargosTecnico_idCargosTecnico` INT(11) NOT NULL,
+  `idUsuarioTecnico` INT(11) NOT NULL,
+  PRIMARY KEY (`IdTecnico`),
+
+  CONSTRAINT `fk_Tecnico_CargosTecnico2`
+    FOREIGN KEY (`CargosTecnico_idCargosTecnico`)
+    REFERENCES `proyectotecknicstore`.`cargostecnico` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Tecnico_Persona1`
+    FOREIGN KEY (`IdTecnico`)
+    REFERENCES `proyectotecknicstore`.`persona` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tiposervicio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tiposervicio` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoServicio` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`servicio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`servicio` (
+  `idServicio` INT(11) NOT NULL AUTO_INCREMENT,
+  `descDaño` VARCHAR(45) NOT NULL,
+  `ServicioTerminado` VARCHAR(45) NOT NULL,
+  `idEquipoaReparar` INT(11) NOT NULL,
+  `IdTecnicoEncargado` INT(11) NOT NULL,
+  `idDueñoServicio` INT(11) NOT NULL,
+  `TipoServicio_idTipoServicio` INT(11) NOT NULL,
+  PRIMARY KEY (`idServicio`),
+
+  CONSTRAINT `fk_Servicio_Equipo2`
+    FOREIGN KEY (`idEquipoaReparar`)
+    REFERENCES `proyectotecknicstore`.`equipo` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Servicio_Tecnico2`
+    FOREIGN KEY (`IdTecnicoEncargado`)
+    REFERENCES `proyectotecknicstore`.`tecnico` (`IdTecnico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Servicio_TipoServicio1`
+    FOREIGN KEY (`TipoServicio_idTipoServicio`)
+    REFERENCES `proyectotecknicstore`.`tiposervicio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`factura`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`factura` (
+  `idFactura` INT(11) NOT NULL AUTO_INCREMENT,
+  `idServicio` INT(11) NOT NULL,
+  `idDueñoFactura` INT(11) NOT NULL,
+  `FechaFactura` DATE NOT NULL,
+  `CostoTotal` VARCHAR(45) NOT NULL,
+  `TiempoGarantia` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idFactura`),
+  INDEX `fk_Factura_Servicio2` (`idServicio` ASC) VISIBLE,
+  CONSTRAINT `fk_Factura_Servicio2`
+    FOREIGN KEY (`idServicio`)
+    REFERENCES `proyectotecknicstore`.`servicio` (`idServicio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`detallefactura`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`detallefactura` (
+  `idDetalleFactura` INT(11) NOT NULL AUTO_INCREMENT,
+  `idServicioSolicitado` INT(11) NOT NULL,
+  `CostoUnitario` VARCHAR(45) NOT NULL,
+  `idFactura` INT(11) NOT NULL,
+  PRIMARY KEY (`idDetalleFactura`),
+
+  CONSTRAINT `fk_DetalleFactura_Factura2`
+    FOREIGN KEY (`idFactura`)
+    REFERENCES `proyectotecknicstore`.`factura` (`idFactura`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DetalleFactura_TipoServicio1`
+    FOREIGN KEY (`idServicioSolicitado`)
+    REFERENCES `proyectotecknicstore`.`tiposervicio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tipocambio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tipocambio` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoCambio` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`registrocambios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`registrocambios` (
+  `idRegistroCambios` INT(11) NOT NULL AUTO_INCREMENT,
+  `Fecha` DATE NOT NULL,
+  `TipoCambio` INT(11) NOT NULL,
+  `IdAdministrador` INT(11) NOT NULL,
+  PRIMARY KEY (`idRegistroCambios`),
+
+  CONSTRAINT `fk_RegistroCambios_Administrador2`
+    FOREIGN KEY (`IdAdministrador`)
+    REFERENCES `proyectotecknicstore`.`administrador` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_RegistroCambios_TipoCambio2`
+    FOREIGN KEY (`TipoCambio`)
+    REFERENCES `proyectotecknicstore`.`tipocambio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`tipousuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`tipousuario` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `TipoUsuario` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `proyectotecknicstore`.`usario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proyectotecknicstore`.`usario` (
+  `idusuario` INT(11) NOT NULL AUTO_INCREMENT,
+  `Correo` VARCHAR(45) NOT NULL,
+  `Clave` VARCHAR(45) NOT NULL,
+  `TipoUsuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idusuario`),
+
+  CONSTRAINT `fk_Uusario_TipoUsuario1`
+    FOREIGN KEY (`TipoUsuario`)
+    REFERENCES `proyectotecknicstore`.`tipousuario` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

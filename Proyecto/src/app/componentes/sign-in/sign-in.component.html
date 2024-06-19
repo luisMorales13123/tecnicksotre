@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div *ngIf="!loading" class="body">
+      
+        <h3 class="mb-2">Registrar Usuario</h3>
+        <div class="container">
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" [(ngModel)]="username" class="form-control" placeholder="Ingrese usuario">
+                <label for="username">Usuario</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" [(ngModel)]="password" class="form-control" placeholder="Ingrese password">
+                <label for="password">Password</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Ingrese password de nuevo">
+                <label for="confirmPassword">Repetir Password</label>
+            </div>
+            <div class="d-grid gap-2 mb-3">
+                <button type="button" (click)="addUser()" class="btn btn-primary btn-lg">Aceptar</button>
+            </div>
+            <a routerLink="/login" class="link-primary">Volver</a>
+        </div>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>

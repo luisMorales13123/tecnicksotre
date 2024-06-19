@@ -1,0 +1,38 @@
+
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="rpw mt-5" *ngIf="!loading">
+    
+<div class="col-lg-4 offset-lg-4">
+    <div class="card border-secondary mb-3" style="max-width: 26rem;">
+        <div class="card-header text-center">{{ operacion }} Factura</div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="addProduct()">
+                <input  formControlName="idServicio" type="number"  class="form-control" placeholder="Ingrese el id del servicio">
+                <span *ngIf="form.get('idServicio')?.hasError('required')  && form.get('idServicio')?.touched ">El campo id servicio es <strong>Requerido</strong></span>
+                <input  formControlName="idDuenoFactura" type="number" class="form-control" placeholder="Ingrese el id del dueño de la factura">
+                <span *ngIf="form.get('idDuenoFactura')?.hasError('required')  && form.get('idDuenoFactura')?.touched ">El campo id del dueño factura es <strong>Requerido</strong></span>
+   
+                <input  formControlName="FechaFactura" type="date"  class="form-control" placeholder="Ingrese la fecha de la factura">
+                <span *ngIf="form.get('FechaFactura')?.hasError('required')  && form.get('FechaFactura')?.touched ">El campo fecha factura es <strong>Requerido</strong></span>
+
+                <input  formControlName="CostoTotal" type="number"  class="form-control" placeholder="Ingrese el costo total de todo ">
+                <span *ngIf="form.get('CostoTotal')?.hasError('required')  && form.get('CostoTotal')?.touched ">El campo costo total es <strong>Requerido</strong></span>
+                <input  formControlName="TiempoGarantia" type="text" class="form-control" placeholder="ingrese el tiempo que tiene la garantia">
+                <span *ngIf="form.get('TiempoGarantia')?.hasError('required')  && form.get('TiempoGarantia')?.touched ">El campo tiempo garantia es <strong>Requerido</strong></span>
+                
+<div class="row mt-2 text-center">
+
+    <div class="col-lg-6"><button routerLink="/" type="button" class="btn btn-secondary">Volver</button></div>
+    <div class="col-lg-6"><button  [disabled]="form.invalid" type="submit" class="btn btn-primary">Agregar</button></div>
+</div>
+
+
+            </form>
+   
+        </div>
+      </div>
+    
+</div>
+
+</div>

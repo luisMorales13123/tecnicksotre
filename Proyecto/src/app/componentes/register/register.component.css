@@ -1,0 +1,14 @@
+.form-container{
+display: flex;
+justify-content: center;
+
+}
+
+.icon-green {
+    color: green;
+  }
+  
+  .icon-red {
+    color: red;
+  }
+  

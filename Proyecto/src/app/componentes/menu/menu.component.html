@@ -1,0 +1,72 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar" style="height: 100%;">
+        <div class="sidebar-header">
+            <h3>Base de datos TecnikStore</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+      
+            <li >
+                <a routerLink="/Usuario">Usuario</a>
+            </li>
+            <li>
+                <a  routerLink="/TipoEquipo"> Editar
+                </a>
+            </li>
+            <li>
+        <a routerLink="/Documento">Documento</a>
+            </li>
+     
+            <li>
+                <a routerLink="/Tiposervio">TipoServicio</a>
+            </li>
+            <li>
+                <a routerLink="/TipoCambio">TipoCambio</a>
+            </li>
+            <li>
+                <a routerLink="/Factura">Factura</a>
+            </li>
+            <li>
+                <a routerLink="/Admisnitrador">Admisnitrador</a>
+            </li>
+            <li>
+                <a routerLink="/Marcas">Marcas</a>
+            </li>
+            <li>
+                <a routerLink="/Servicio">Servicio</a>
+            </li>
+
+            <li>
+                <a routerLink="/CargoTecnico">CargosTecnico</a>
+            </li>
+
+            <li>
+                <a routerLink="/Persona">Persona</a>
+            </li>
+            
+            <li>
+                <a routerLink="/Persona">Persona</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <button type="button" class="btn btn-danger" routerLink="/login">Cerrar sesion</button>
+            </li>
+       
+        </ul>
+    </nav>
+
+
+  
+</div>
+
+
+<script>
+    $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+</script>

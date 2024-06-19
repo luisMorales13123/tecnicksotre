@@ -1,0 +1,41 @@
+<div class="container-fluid p-0">
+    <div class="row">
+      <!-- Menú -->
+      <div class="col-md-3"  >
+        <app-menu></app-menu>
+      </div>
+      <!-- CRUD -->
+      <div class="col-md-9">
+        <app-progress-bar *ngIf="loading"></app-progress-bar>
+        <div *ngIf="!loading" class="container">
+          <!-- Contenido del CRUD -->
+          <div class="title">
+            <h4>Listado de Marcas</h4>
+            <button type="button" class="btn btn-primary" routerLink="/AgregarMarcas">Agregar cargo</button>
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Tipo de cargo</th>
+                <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ListarMarcas" class="table-active">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.Marcas }}</td>
+  
+                  <td>
+                    <button type="button" class="btn btn-info btn-sm" routerLink="/MarcasEditar/{{ item.id }}">Editar</button>
+                    <button (click)="deleteProduct(item.id)" type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
+                  </td>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  

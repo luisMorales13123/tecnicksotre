@@ -1,0 +1,51 @@
+<div class="container-fluid p-0">
+    <div class="row">
+      <!-- Menú -->
+      <div class="col-md-3"  >
+        <app-menu></app-menu>
+      </div>
+      <!-- CRUD -->
+      <div class="col-md-9">
+        <app-progress-bar *ngIf="loading"></app-progress-bar>
+        <div *ngIf="!loading" class="container">
+          <!-- Contenido del CRUD -->
+          <div class="title">
+            <h4>Listado de Servicio</h4>
+            <button type="button" class="btn btn-primary" routerLink="/AgregarServicio">Agregar cargo</button>
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Descripcion de inconvenientes</th>
+                <th scope="col">Servicio terminado</th>
+                <th scope="col">Equipo a reparar</th>
+                <th scope="col">Técnico encargado</th>
+                <th scope="col">Propietario del servicio</th>
+                <th scope="col">Tipo de servicio</th>
+                <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of ListarsServicio" class="table-active">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.descDano }}</td>
+                  <td>{{ item.ServicioTerminado }}</td>
+                  <td>{{ item.idEquipoaReparar }}</td>
+                  <td>{{ item.IdTecnicoEncargado }}</td>
+                  <td>{{ item.idDuenoServicio }}</td>
+                  <td>{{ item.TipoServicio_idTipoServicio }}</td>
+  
+                  <td>
+                    <button type="button" class="btn btn-info btn-sm" routerLink="/ServicioEditar/{{ item.id }}">Editar</button>
+                    <button (click)="deleteProduct(item.id)" type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
+                  </td>
+                </tr>
+  
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  

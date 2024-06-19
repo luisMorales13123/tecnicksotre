@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container" >
+    <div class="title">
+        <h4>Listado de Equipos</h4>
+        <button type="button" class="btn btn-primary" routerLink="/AgregarEquipo">Agregar Equipo</button>
+    </div>
+
+    <table  class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"> Id</th>
+            <th scope="col"> descInconveniente</th>
+            <th scope="col"> idMarca</th>
+            <th scope="col"> IdTipoEquipo</th>
+            <th scope="col"> idUusario</th>
+
+            <th scope="col"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of ListarEquipo" class="table-active">
+            <td>{{ item.id }}</td>
+            <td>{{ item.descInconveniente}}</td>
+            <td>{{ item.idMarca}}</td>
+            <td>{{ item.idTipoEquipo}}</td>
+            <td>{{ item.idUsuario}}</td>
+
+
+            <td>
+                <button type="button" class="btn btn-info btn-sm" routerLink="/editarEquipo/{{ item.id }}">Editar</button>
+                <button (click)="deleteProduct(item.id)" type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+
+
